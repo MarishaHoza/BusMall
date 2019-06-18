@@ -101,7 +101,7 @@ var displayResults = function(){
     var liEl = document.createElement('li');
     var currentProduct = ProductImage.allImages[i];
     var percentage = Math.round((currentProduct.clicks / currentProduct.timesShown) * 100);
-    liEl.textContent = currentProduct.id + ': ' + percentage + '% votes';
+    liEl.textContent = currentProduct.id + ': ' + percentage + '%';
     resultsContainer.appendChild(liEl);
   }
 };
