@@ -147,22 +147,22 @@ var populateImages = function(){
   new ProductImage('Banana Slicer', '../img/banana.jpg', 'banana');
   new ProductImage('Bathroom Tablet Holder', '../img/bathroom.jpg', 'bathroom');
   new ProductImage('Peekaboo Toe Rain Boots', '../img/boots.jpg', 'boots');
-  new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.jpg', 'breakfast');
+  new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.png', 'breakfast');
   new ProductImage('Meatball Bubblegum', '../img/bubblegum.jpg', 'bubblegum');
-  new ProductImage('Rounded Chair', '../img/chair.jpg', 'chair');
+  new ProductImage('Rounded Chair', '../img/chair.png', 'chair');
   new ProductImage('Cthulhu Figurine', '../img/cthulhu.jpg', 'cthulhu');
   new ProductImage('Doggie Duck Bill', '../img/dog-duck.png', 'dog-duck');
   new ProductImage('Dragon Meat', '../img/dragon.png', 'dragon');
-  new ProductImage('Pen Silverware', '../img/pen.jpg', 'pen');
-  new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.jpg', 'pet-sweep');
-  new ProductImage('Pizza Scissors', '../img/scissors.jpg', 'scissors');
-  new ProductImage('Shark Sleeping Bag', '../img/shark.jpg', 'shark');
+  new ProductImage('Pen Silverware', '../img/pen.png', 'pen');
+  new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.png', 'pet-sweep');
+  new ProductImage('Pizza Scissors', '../img/scissors.png', 'scissors');
+  new ProductImage('Shark Sleeping Bag', '../img/shark.png', 'shark');
   new ProductImage('Baby Sweeper Onesie', '../img/sweep.png', 'sweep');
-  new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.jpg', 'tauntaun');
-  new ProductImage('Unicorn Meat', '../img/unicorn.jpg', 'unicorn');
+  new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.png', 'tauntaun');
+  new ProductImage('Unicorn Meat', '../img/unicorn.png', 'unicorn');
   new ProductImage('Tentacle USB', '../img/usb.gif', 'usb');
   new ProductImage('Self-Watering Can', '../img/water-can.jpg', 'water-can');
-  new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.jpg', 'wine-glass');
+  new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.png', 'wine-glass');
 };
 
 
