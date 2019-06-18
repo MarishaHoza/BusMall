@@ -6,12 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>BusMall Market Research</title>
   <link href="./css/reset.css" type="text/css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway&display=swap" rel="stylesheet">
   <link href="./css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
   <header>
-    <img src="https://placehold.it/150x50/111"/>
-    <h1>BusMall Market Research Game</h1>
+    <!-- bus image from freepik.com -->
+    <img src="./img/bus.png"/>
+    <h1><span>BusMall</span> Market Research</h1>
     <nav>
       <ul>
         <li>Contact</li>
@@ -22,12 +24,12 @@
     </nav>
   </header>
   <main>
-    <aside>
-      <h2>Results</h2>
-      <ul id="results">
-      </ul>
-    </aside>
     <section>
+      <h2>Instructions:</h2>
+      <p>
+        Choose your favorite product by clicking the relevant image. You will be presented with 25 sets of images. Please complete all 25 sets.
+      </p>
+
       <ul id="image-container">
         <li>
           <img id="img1" src="">
@@ -42,14 +44,17 @@
           <h3 id="desc3">description</h3>
         </li>
       </ul>
-      <article>
-        Choose your favorite product by clicking the relevant image. You will be presented with 25 sets of images. Please complete all 25 sets.
-      </article>
+      <section id="hidden">
+        <div>
+          <canvas id="results-chart" width="600" height="300"></canvas>
+        </div>
+      </section>
     </section>
   </main>
   <footer>
 
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <script src="./js/app.js"></script>
 </body>
 </html>
