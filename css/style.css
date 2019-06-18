@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  height: 100px;
+  width: 100%;
+  background-color: #ddd;
+  overflow: hidden;
+  font-family: sans-serif;
+  padding: 25px;
+  min-width: 1100px;  
+}
+
+main {
+  font-family: sans-serif;
+  padding: 25px;
+  overflow: hidden;
+  min-width: 1100px;
+}
+
+footer {
+  font-family: sans-serif;
+  padding: 25px;
+  height: 100px;
+  background-color: #ddd;
+  min-width: 1100px;
+
+}
+
+
+header > img {
+  float: left;
+  width: 150px;
+  height: 50px;
+}
+
+header > h1 {
+  float: left;
+  font-size: 2em;
+  line-height: 50px;
+  margin-left: 25px;
+}
+
+header > nav {
+  width: 400px;
+  float: right;
+  overflow: hidden;
+}
+
+header > nav li {
+  float: right;
+  height: 50px;
+  width: 100px;
+  border: 2px solid #333;
+  text-align: center;
+  font-size: 1.25em;
+  border-radius: 10px 10px 0px 0px;
+  line-height: 50px;
+}
+
+
+main > aside {
+  float: left;
+  width: 20%;
+  min-width: 200px;
+  min-height: 550px;
+  border: 3px solid #333;
+  padding: 25px;
+  border-radius: 25px;
+}
+
+main > aside > h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+main > aside > ul {
+  margin-top: 25px;
+  list-style: initial;
+  margin-left: 25px;
+}
+
+main > aside > ul > li {
+  line-height: 1.5em;
+}
+
+main > section {
+  float: right;
+  width: 80%;
+}
+
+main > section > ul {
+  overflow: hidden;
+}
+
+main > section > ul > li {
+  float: left;
+  overflow: hidden;
+  width: 30%;
+  padding-top: 30%;
+  margin-left: 3%;
+  position: relative;
+  border: 3px solid #ddd;
+  border-radius: 25px;
+}
+
+main > section > ul > li h3 {
+  text-align: center;
+  margin: 25px;
+  font-size: 1.2em;
+}
+
+main > section > ul > li img {
+  padding: 0% 5%;
+  max-width: 100%;
+  position: absolute;
+  top: 5%;
+  max-height: 80%;
+}
+
+main > section > article {
+  float: right;
+  min-height: 160px;
+  padding: 2% 5%;
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+
+
+#selected {
+  background-color: #fafafa;
+}
+
