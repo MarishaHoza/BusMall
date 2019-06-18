@@ -10,13 +10,14 @@ var desc1 = document.getElementById('desc1');
 var desc2 = document.getElementById('desc2');
 var desc3 = document.getElementById('desc3');
 var resultsContainer = document.getElementById('results');
+var resultsChartContainer = document.getElementById('results-chart');
 
 var totalClicks = 0;
 var availableClicks = 25;
 
 var currentImages = [];
+// this variable is used on setCurrentAndPrevious(), not sure why it says it isn't...
 var previousImages = null;
-
 
 
 // ------------------- Constructor -------------------
@@ -27,12 +28,25 @@ var ProductImage = function(name, imgSrc, id){
   this.timesShown = 0;
   this.src = imgSrc;
   this.id = id;
+  this.color = pickRandomColor();
   ProductImage.allImages.push(this);
 };
 ProductImage.allImages = [];
 
 
 // ------------------- Functions -------------------
+
+var pickRandomColor = function(){
+  var randomRgb = function(){
+    var rand = Math.floor(Math.random()*255);
+    return rand;
+  };
+  var randomA = function(){
+    var rand = Math.random()*(1-0.2)+0.2;
+    return rand;
+  };
+  return (`rgba(${randomRgb()}, ${randomRgb()}, ${randomRgb()}, ${randomA()})`);
+};
 
 var renderImages = function(firstIndex, secondIndex, thirdIndex){
   img1.src = ProductImage.allImages[firstIndex].src;
@@ -96,16 +110,6 @@ var generateImages = function(){
   incrementTimesShown();
 };
 
-var displayResults = function(){
-  for (var i = 0; i < ProductImage.allImages.length; i++){
-    var liEl = document.createElement('li');
-    var currentProduct = ProductImage.allImages[i];
-    var percentage = Math.round((currentProduct.clicks / currentProduct.timesShown) * 100);
-    liEl.textContent = currentProduct.id + ': ' + percentage + '%';
-    resultsContainer.appendChild(liEl);
-  }
-};
-
 var handleImageClick = function(event){
 
   if (totalClicks < availableClicks){
@@ -123,7 +127,7 @@ var handleImageClick = function(event){
 
   if (totalClicks === availableClicks) {
     imageContainer.removeEventListener('click', handleImageClick);
-    displayResults();
+    chartForResults();
   }
 };
 
@@ -138,26 +142,92 @@ imageContainer.addEventListener('click', handleImageClick);
 
 // ------------------- Add all images -------------------
 
-new ProductImage('R2-D2 Bag', '../img/bag.jpg', 'bag');
-new ProductImage('Banana Slicer', '../img/banana.jpg', 'banana');
-new ProductImage('Bathroom Tablet Holder', '../img/bathroom.jpg', 'bathroom');
-new ProductImage('Peekaboo Toe Rain Boots', '../img/boots.jpg', 'boots');
-new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.jpg', 'breakfast');
-new ProductImage('Meatball Bubblegum', '../img/bubblegum.jpg', 'bubblegum');
-new ProductImage('Rounded Chair', '../img/chair.jpg', 'chair');
-new ProductImage('Cthulhu Figurine', '../img/cthulhu.jpg', 'cthulhu');
-new ProductImage('Doggie Duck Bill', '../img/dog-duck.jpg', 'dog-duck');
-new ProductImage('Dragon Meat', '../img/dragon.jpg', 'dragon');
-new ProductImage('Pen Silverware', '../img/pen.jpg', 'pen');
-new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.jpg', 'pet-sweep');
-new ProductImage('Pizza Scissors', '../img/scissors.jpg', 'scissors');
-new ProductImage('Shark Sleeping Bag', '../img/shark.jpg', 'shark');
-new ProductImage('Baby Sweeper Onesie', '../img/sweep.png', 'sweep');
-new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.jpg', 'tauntaun');
-new ProductImage('Unicorn Meat', '../img/unicorn.jpg', 'unicorn');
-new ProductImage('Tentacle USB', '../img/usb.gif', 'usb');
-new ProductImage('Self-Watering Can', '../img/water-can.jpg', 'water-can');
-new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.jpg', 'wine-glass');
+var populateImages = function(){
+  new ProductImage('R2-D2 Bag', '../img/bag.png', 'bag');
+  new ProductImage('Banana Slicer', '../img/banana.jpg', 'banana');
+  new ProductImage('Bathroom Tablet Holder', '../img/bathroom.jpg', 'bathroom');
+  new ProductImage('Peekaboo Toe Rain Boots', '../img/boots.jpg', 'boots');
+  new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.jpg', 'breakfast');
+  new ProductImage('Meatball Bubblegum', '../img/bubblegum.jpg', 'bubblegum');
+  new ProductImage('Rounded Chair', '../img/chair.jpg', 'chair');
+  new ProductImage('Cthulhu Figurine', '../img/cthulhu.jpg', 'cthulhu');
+  new ProductImage('Doggie Duck Bill', '../img/dog-duck.png', 'dog-duck');
+  new ProductImage('Dragon Meat', '../img/dragon.png', 'dragon');
+  new ProductImage('Pen Silverware', '../img/pen.jpg', 'pen');
+  new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.jpg', 'pet-sweep');
+  new ProductImage('Pizza Scissors', '../img/scissors.jpg', 'scissors');
+  new ProductImage('Shark Sleeping Bag', '../img/shark.jpg', 'shark');
+  new ProductImage('Baby Sweeper Onesie', '../img/sweep.png', 'sweep');
+  new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.jpg', 'tauntaun');
+  new ProductImage('Unicorn Meat', '../img/unicorn.jpg', 'unicorn');
+  new ProductImage('Tentacle USB', '../img/usb.gif', 'usb');
+  new ProductImage('Self-Watering Can', '../img/water-can.jpg', 'water-can');
+  new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.jpg', 'wine-glass');
+};
 
 
-generateImages();
+var renderPage = function(){
+  populateImages();
+  generateImages();
+};
+
+renderPage();
+
+
+
+// make the chart
+
+var chartForResults = function(){
+
+  var percentages = [];
+  var labels = [];
+  var colors = [];
+
+  for (var i = 0; i < ProductImage.allImages.length; i++){
+    var percent = Math.round((ProductImage.allImages[i].clicks / ProductImage.allImages[i].timesShown) * 100);
+
+    // add to the object instance instead?
+    percentages.push(percent);
+    labels.push(ProductImage.allImages[i].name);
+    colors.push(ProductImage.allImages[i].color);
+  }
+
+
+  var chartData = {
+    labels: labels,
+    datasets: [{
+      label: '',
+      data: percentages,
+      backgroundColor: colors,
+      borderColor: colors,
+      borderWidth: 1
+    }]
+  };
+
+  var chartObject = {
+    type: 'bar',
+    data: chartData,
+    options: {
+      title: {
+        display: true,
+        text: '% of positive votes per times shown'
+      },
+      legend: {
+        display: false,
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  };
+
+  var resultsChart = new Chart(resultsChartContainer, chartObject);
+
+
+};
+
+

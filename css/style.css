@@ -59,35 +59,20 @@ header > nav li {
   line-height: 50px;
 }
 
-
-main > aside {
-  float: left;
-  width: 20%;
-  min-width: 200px;
-  min-height: 550px;
-  border: 3px solid #333;
-  padding: 25px;
-  border-radius: 25px;
-}
-
-main > aside > h2 {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-main > aside > ul {
-  margin-top: 25px;
-  list-style: initial;
-  margin-left: 25px;
-}
-
-main > aside > ul > li {
-  line-height: 1.5em;
-}
-
 main > section {
-  float: right;
-  width: 80%;
+  width: 100%;
+}
+
+main > section > h2 {
+  font-size: 1.8em;
+  margin: 1% 3%;
+}
+
+main > section > p {
+  margin: 0% 5%;
+  min-height: 50px;
+  font-size: 1.2em;
+  line-height: 1.5em;
 }
 
 main > section > ul {
@@ -119,14 +104,14 @@ main > section > ul > li img {
   max-height: 80%;
 }
 
-main > section > article {
-  float: right;
-  min-height: 160px;
-  padding: 2% 5%;
-  font-size: 1.2em;
-  line-height: 1.5em;
-}
 
+main > section > section:last-child div {
+  width: 70%;
+  margin: 25px auto;
+  padding: 3%;
+  border: 3px solid #ddd;
+  border-radius: 25px;
+}
 
 #selected {
   background-color: #fafafa;
