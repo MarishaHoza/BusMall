@@ -9,8 +9,9 @@ var img3 = document.getElementById('img3');
 var desc1 = document.getElementById('desc1');
 var desc2 = document.getElementById('desc2');
 var desc3 = document.getElementById('desc3');
-var resultsContainer = document.getElementById('results');
 var resultsChartContainer = document.getElementById('results-chart');
+var resultsSection = document.getElementById('hidden');
+var resultsChart = null;
 
 var totalClicks = 0;
 var availableClicks = 25;
@@ -52,9 +53,11 @@ var renderImages = function(firstIndex, secondIndex, thirdIndex){
   img1.src = ProductImage.allImages[firstIndex].src;
   img1.id = ProductImage.allImages[firstIndex].id;
   desc1.textContent = ProductImage.allImages[firstIndex].name;
+
   img2.src = ProductImage.allImages[secondIndex].src;
   img2.id = ProductImage.allImages[secondIndex].id;
   desc2.textContent = ProductImage.allImages[secondIndex].name;
+
   img3.src = ProductImage.allImages[thirdIndex].src;
   img3.id = ProductImage.allImages[thirdIndex].id;
   desc3.textContent = ProductImage.allImages[thirdIndex].name;
@@ -92,7 +95,6 @@ var checkIfOnPage = function(numToCheck){
 
 
 var generateImages = function(){
-
   do {
     var firstIndex = Math.floor(Math.random() * ProductImage.allImages.length);
   } while (checkIfOnPage(firstIndex));
@@ -111,74 +113,34 @@ var generateImages = function(){
 };
 
 var handleImageClick = function(event){
-
-  if (totalClicks < availableClicks){
-    var target = event.target;
-    var imgId = target.id;
-    for (var i = 0; i < currentImages.length; i++){
-      if (imgId === currentImages[i].id) {
-        currentImages[i].clicks++;
-        generateImages();
-      }
-    }
-  }
+  var target = event.target;
+  var imgId = target.id;
 
   totalClicks++;
 
+  for (var i = 0; i < currentImages.length; i++){
+    if (imgId === currentImages[i].id) {
+      currentImages[i].clicks++;
+      generateImages();
+    }
+  }
+
   if (totalClicks === availableClicks) {
-    imageContainer.removeEventListener('click', handleImageClick);
     chartForResults();
+    resultsSection.id = '';
+
+  } else if (totalClicks > availableClicks) {
+    for (i = 0; i < ProductImage.allImages.length; i++){
+      if (imgId === ProductImage.allImages[i].id){
+        resultsChart.data.datasets[0].data[i] = Math.round((ProductImage.allImages[i].clicks / ProductImage.allImages[i].timesShown) * 100);
+        resultsChart.update();
+      }
+    }
   }
 };
 
-
-
-
-// ------------------- Add event listener -------------------
-imageContainer.addEventListener('click', handleImageClick);
-
-
-
-
-// ------------------- Add all images -------------------
-
-var populateImages = function(){
-  new ProductImage('R2-D2 Bag', '../img/bag.png', 'bag');
-  new ProductImage('Banana Slicer', '../img/banana.jpg', 'banana');
-  new ProductImage('Bathroom Tablet Holder', '../img/bathroom.jpg', 'bathroom');
-  new ProductImage('Peekaboo Toe Rain Boots', '../img/boots.jpg', 'boots');
-  new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.png', 'breakfast');
-  new ProductImage('Meatball Bubblegum', '../img/bubblegum.jpg', 'bubblegum');
-  new ProductImage('Rounded Chair', '../img/chair.png', 'chair');
-  new ProductImage('Cthulhu Figurine', '../img/cthulhu.jpg', 'cthulhu');
-  new ProductImage('Doggie Duck Bill', '../img/dog-duck.png', 'dog-duck');
-  new ProductImage('Dragon Meat', '../img/dragon.png', 'dragon');
-  new ProductImage('Pen Silverware', '../img/pen.png', 'pen');
-  new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.png', 'pet-sweep');
-  new ProductImage('Pizza Scissors', '../img/scissors.png', 'scissors');
-  new ProductImage('Shark Sleeping Bag', '../img/shark.png', 'shark');
-  new ProductImage('Baby Sweeper Onesie', '../img/sweep.png', 'sweep');
-  new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.png', 'tauntaun');
-  new ProductImage('Unicorn Meat', '../img/unicorn.png', 'unicorn');
-  new ProductImage('Tentacle USB', '../img/usb.gif', 'usb');
-  new ProductImage('Self-Watering Can', '../img/water-can.jpg', 'water-can');
-  new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.png', 'wine-glass');
-};
-
-
-var renderPage = function(){
-  populateImages();
-  generateImages();
-};
-
-renderPage();
-
-
-
 // make the chart
-
 var chartForResults = function(){
-
   var percentages = [];
   var labels = [];
   var colors = [];
@@ -191,7 +153,6 @@ var chartForResults = function(){
     labels.push(ProductImage.allImages[i].name);
     colors.push(ProductImage.allImages[i].color);
   }
-
 
   var chartData = {
     labels: labels,
@@ -225,9 +186,45 @@ var chartForResults = function(){
     }
   };
 
-  var resultsChart = new Chart(resultsChartContainer, chartObject);
-
-
+  // chart is defined in the chart.js library
+  resultsChart = new Chart(resultsChartContainer, chartObject);
 };
+
+
+// ------------------- Add all images -------------------
+var populateImages = function(){
+  new ProductImage('R2-D2 Bag', '../img/bag.png', 'bag');
+  new ProductImage('Banana Slicer', '../img/banana.jpg', 'banana');
+  new ProductImage('Bathroom Tablet Holder', '../img/bathroom.jpg', 'bathroom');
+  new ProductImage('Peekaboo Toe Rain Boots', '../img/boots.jpg', 'boots');
+  new ProductImage('All-In-One Breakfast Maker', '../img/breakfast.png', 'breakfast');
+  new ProductImage('Meatball Bubblegum', '../img/bubblegum.jpg', 'bubblegum');
+  new ProductImage('Rounded Chair', '../img/chair.png', 'chair');
+  new ProductImage('Cthulhu Figurine', '../img/cthulhu.jpg', 'cthulhu');
+  new ProductImage('Doggie Duck Bill', '../img/dog-duck.png', 'dog-duck');
+  new ProductImage('Dragon Meat', '../img/dragon.png', 'dragon');
+  new ProductImage('Pen Silverware', '../img/pen.png', 'pen');
+  new ProductImage('Pet Sweep Dust Boots', '../img/pet-sweep.png', 'pet-sweep');
+  new ProductImage('Pizza Scissors', '../img/scissors.png', 'scissors');
+  new ProductImage('Shark Sleeping Bag', '../img/shark.png', 'shark');
+  new ProductImage('Baby Sweeper Onesie', '../img/sweep.png', 'sweep');
+  new ProductImage('Tauntaun Sleeping Bag', '../img/tauntaun.png', 'tauntaun');
+  new ProductImage('Unicorn Meat', '../img/unicorn.png', 'unicorn');
+  new ProductImage('Tentacle USB', '../img/usb.gif', 'usb');
+  new ProductImage('Self-Watering Can', '../img/water-can.jpg', 'water-can');
+  new ProductImage('Peep-Hole Wine Glass', '../img/wine-glass.png', 'wine-glass');
+};
+
+
+var renderPage = function(){
+  imageContainer.addEventListener('click', handleImageClick);
+  populateImages();
+  generateImages();
+};
+
+renderPage();
+
+
+
 
 
