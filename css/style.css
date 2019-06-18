@@ -62,6 +62,7 @@ main > aside {
   min-height: 600px;
   border: 2px solid #333;
   padding: 25px;
+  border-radius: 25px;
 }
 
 main > aside > h2 {
@@ -73,6 +74,10 @@ main > aside > ul {
   margin-top: 25px;
   list-style: initial;
   margin-left: 25px;
+}
+
+main > aside > ul > li {
+  line-height: 1.5em;
 }
 
 main > section {
@@ -87,24 +92,34 @@ main > section > ul {
 main > section > ul > li {
   float: left;
   overflow: hidden;
-  width: 33.3%;
-  padding: 25px;
+  width: 30%;
+  padding-top: 30%;
+  margin-left: 3%;
+  position: relative;
+  border: 3px solid #ddd;
+  border-radius: 25px;
 }
 
 main > section > ul > li h3 {
   text-align: center;
-  margin-top: 25px;
+  margin: 25px;
   font-size: 1.2em;
 }
 
 main > section > ul > li img {
+  padding: 0% 5%;
   max-width: 100%;
+  position: absolute;
+  top: 5%;
+  max-height: 80%;
 }
 
 main > section > article {
   float: right;
   min-height: 184px;
-  padding: 25px;
+  padding: 2% 5%;
+  font-size: 1.2em;
+  line-height: 1.5em;
 }
 
 
