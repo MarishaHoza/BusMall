@@ -16,10 +16,9 @@
     <h1><span>BusMall</span> Market Research</h1>
     <nav>
       <ul>
-        <li>Contact</li>
-        <li>About</li>
-        <li id="selected">Products</li>
-        <li>Home</li>
+        <li><button id="resetButton">Reset Data</button></li>
+        <li><button id="moreClicksButton">Add More Clicks</button></li>
+        <li id="selected">Remaining Clicks : <span id="num-clicks-remaining">###</span></li>
       </ul>
     </nav>
   </header>
@@ -27,19 +26,19 @@
     <section>
       <h2>Instructions:</h2>
       <p>
-        Choose your favorite product by clicking the relevant image. You will be presented with 25 sets of images. Please complete all 25 sets.
+        Choose your favorite product by clicking the relevant image. You will be presented with 25 sets of images. Please complete at least 25 sets.
       </p>
 
       <ul id="image-container">
-        <li>
+        <li id="imgLi1">
           <img id="img1" src="">
           <h3 id="desc1">description</h3>
         </li>
-        <li>
+        <li id="imgLi2">
           <img id="img2" src="">
           <h3 id="desc2">description</h3>
         </li>
-        <li>
+        <li id="imgLi3">
           <img id="img3" src="">
           <h3 id="desc3">description</h3>
         </li>
