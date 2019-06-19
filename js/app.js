@@ -3,6 +3,9 @@
 // ------------------- Global Variables -------------------
 
 var imageContainer = document.getElementById('image-container');
+var imgLi1 = document.getElementById('imgLi1');
+var imgLi2 = document.getElementById('imgLi2');
+var imgLi3 = document.getElementById('imgLi3');
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
@@ -74,15 +77,21 @@ var pickRandomColor = function(){
 var renderImages = function(firstIndex, secondIndex, thirdIndex){
   img1.src = ProductImage.allImages[firstIndex].src;
   img1.id = ProductImage.allImages[firstIndex].id;
+  imgLi1.id = ProductImage.allImages[firstIndex].id;
   desc1.textContent = ProductImage.allImages[firstIndex].name;
+  desc1.id = ProductImage.allImages[firstIndex].id;
 
   img2.src = ProductImage.allImages[secondIndex].src;
-  img2.id = ProductImage.allImages[secondIndex].id;
+  img2.id = ProductImage.allImages[firstIndex].id;
+  imgLi2.id = ProductImage.allImages[secondIndex].id;
   desc2.textContent = ProductImage.allImages[secondIndex].name;
+  desc2.id = ProductImage.allImages[secondIndex].id;
 
   img3.src = ProductImage.allImages[thirdIndex].src;
-  img3.id = ProductImage.allImages[thirdIndex].id;
+  img3.id = ProductImage.allImages[firstIndex].id;
+  imgLi3.id = ProductImage.allImages[thirdIndex].id;
   desc3.textContent = ProductImage.allImages[thirdIndex].name;
+  desc3.id = ProductImage.allImages[thirdIndex].id;
 };
 
 var setCurrentAndPrevious = function(firstIndex, secondIndex, thirdIndex){
@@ -147,6 +156,7 @@ var updateRemainingClicksShown = function(){
 var handleImageClick = function(event){
   var target = event.target;
   var imgId = target.id;
+  console.log(imgId);
 
   
   if (totalClicks >= availableClicks) {
@@ -172,7 +182,7 @@ var handleImageClick = function(event){
     resultsSection.id = '';
   }
 
-  // if the user has done more than 25 image clicks, the chart is shown 
+  // if the user has done more than 25 image clicks, the chart is shown
   else if (totalClicks >= clicksToShowChart) {
     for (i = 0; i < ProductImage.allImages.length; i++){
       if (imgId === ProductImage.allImages[i].id){
@@ -255,6 +265,7 @@ var handleResetButton = function() {
   totalClicks = 0;
   availableClicks = 25;
   updateRemainingClicksShown();
+  resultsSection.id = 'hidden';
   localStorage.setItem('availableClicks', JSON.stringify(availableClicks));
 };
 
