@@ -156,12 +156,10 @@ var updateRemainingClicksShown = function(){
 var handleImageClick = function(event){
   var target = event.target;
   var imgId = target.id;
-  console.log(imgId);
 
-  
   if (totalClicks >= availableClicks) {
     imageContainer.removeEventListener('click', handleImageClick);
-    
+
     // if we have clicks remaining
   } else {
 
@@ -260,7 +258,6 @@ var handleMoreClicksButton = function() {
 };
 
 var handleResetButton = function() {
-  console.log('clicked button');
   localStorage.clear();
   totalClicks = 0;
   availableClicks = 25;
@@ -305,7 +302,6 @@ var renderPage = function(){
 
   // if an array of product images doesn't exist yet, populate it
   if (ProductImage.allImages.length === 0){
-    console.log('populating');
     populateImages();
   }
 
